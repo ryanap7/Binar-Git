@@ -10,6 +10,6 @@ class MainActivity : AppCompatActivity() {
 		
 		println("==== Feature SUM ====")
 		
-		println("==== Feature SUM ====")
+		println("==== Feature Subtraction ====")
 	}
 }
