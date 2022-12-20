@@ -9,5 +9,7 @@ class MainActivity : AppCompatActivity() {
 		setContentView(R.layout.activity_main)
 		
 		println("==== Feature SUM ====")
+		
+		println("==== Feature SUM ====")
 	}
 }
