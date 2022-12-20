@@ -13,5 +13,7 @@ class MainActivity : AppCompatActivity() {
 		println("==== Feature Subtraction ====")
 		
 		println("==== Feature Multiplication ====")
+		
+		println("==== Feature Distribution ====")
 	}
 }
