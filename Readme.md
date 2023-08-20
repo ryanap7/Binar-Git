@@ -1,22 +1,84 @@
-# Panduan Penggunaan Markdown
+```javascript
+import React, { useEffect } from 'react';
+import { Animated, Easing, StyleSheet, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
-Markdown adalah bahasa penandaan ringan yang dapat digunakan untuk memformat teks dengan cara yang mudah dibaca dan ditulis. Salah satu fitur utama dari Markdown adalah kemampuannya untuk menyoroti kode. Di bawah ini, kita akan melihat bagaimana cara melakukannya.
+// Deklarasi properti yang diterima oleh komponen Skeleton
+interface Props {
+  children?: JSX.Element;
+  height: any;
+  width: any;
+  borderRadius?: number;
+  marginBottom?: number;
+  marginRight?: number;
+}
 
-## Menyoroti Kode di Markdown
+// Membuat komponen Animation dengan animasi menggunakan Animated
+const Animation = Animated.createAnimatedComponent(LinearGradient);
 
-Untuk menyoroti kode di Markdown, Anda dapat menggunakan tanda backtick (\`) untuk membungkus kode. Misalnya, ini adalah cara menampilkan kode Python sederhana:
+// Komponen utama Skeleton
+const Skeleton = ({
+  children,
+  height,
+  width,
+  borderRadius,
+  marginBottom,
+  marginRight,
+}: Props) => {
+  // Membuat objek animatedValue sebagai pengendali animasi
+  const animatedValue = new Animated.Value(0);
 
-\```python
-def hello_world():
-    print("Hello, World!")
+  // Efek animasi looping ketika komponen dimuat
+  useEffect(() => {
+    Animated.loop(
+      Animated.timing(animatedValue, {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }),
+    ).start();
+  });
 
-hello_world()
-\```
+  // Menghitung perubahan transformasi untuk efek bergerak
+  const translateX = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-width, width],
+  });
 
-Hasilnya akan terlihat seperti ini:
+  // Mengembalikan tampilan komponen Skeleton
+  return (
+    <View
+      style={[
+        styles.container,
+        {
+          height,
+          width,
+          borderRadius,
+          marginBottom,
+          marginRight,
+        },
+      ]}>
+      <Animation
+        colors={['#a0a0a0', '#b0b0b0', '#b0b0b0', '#a0a0a0']}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{
+          ...StyleSheet.absoluteFillObject,
+          transform: [{ translateX: translateX }],
+        }}
+      />
+      {children}
+    </View>
+  );
+};
 
-```python
-def hello_world():
-    print("Hello, World!")
+// Gaya (style) untuk kontainer komponen Skeleton
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#a0a0a0',
+    overflow: 'hidden',
+  },
+});
 
-hello_world()
+export default Skeleton;
