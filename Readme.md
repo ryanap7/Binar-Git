@@ -1,3 +1,5 @@
+![Skeleton](https://i0.wp.com/www.cssscript.com/wp-content/uploads/2019/06/skeleton-loader-placeholder.jpg?fit=520%2C394&ssl=1)
+
 # Penjelasan Kode React Native: Komponen Skeleton
 
 Dalam konten ini, kita akan membahas kode dari komponen Skeleton dalam aplikasi React Native. Komponen ini digunakan untuk membuat efek kerangka kosong (skeleton) yang akan digunakan saat konten sedang dimuat.
